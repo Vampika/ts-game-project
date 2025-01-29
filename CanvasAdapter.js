@@ -1,11 +1,13 @@
 export class CanvasAdapter {
     constructor(app) {
         this.app = app;
+        this.isMobile = /Mobi|Android/i.test(navigator.userAgent);
         this.init();
     }
     init() {
         this.resizeCanvas();
-        this.setupFullscreen();
+        if (this.isMobile)
+            this.setupFullscreen();
         window.addEventListener("resize", () => this.resizeCanvas());
     }
     resizeCanvas() {
@@ -13,9 +15,8 @@ export class CanvasAdapter {
         const height = window.innerHeight;
         const maxWidth = 1280; // Максимальная ширина для десктопных браузеров
         const maxHeight = 768; // Максимальная высота для десктопных браузеров
-        const isMobile = /Mobi|Android/i.test(navigator.userAgent);
         // Вычисляем коэффициент масштабирования по меньшей стороне
-        const scaleFactor = isMobile
+        const scaleFactor = this.isMobile
             ? Math.min(width / this.app.renderer.width, height / this.app.renderer.height)
             : Math.min(maxWidth / this.app.renderer.width, maxHeight / this.app.renderer.height);
         // Новые размеры холста
