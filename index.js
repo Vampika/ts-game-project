@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 //@ts-ignore
 import * as PIXI from "./pixi.min.mjs";
 import { Game } from "./Game.js";
+import { CanvasAdapter } from "./CanvasAdapter.js";
 import { gameConfig } from "./config.js";
 function initializeApp() {
     return __awaiter(this, void 0, void 0, function* () {
@@ -22,6 +23,7 @@ function initializeApp() {
         });
         // Добавляем canvas в DOM
         document.body.appendChild(app.canvas);
+        new CanvasAdapter(app);
         const game = new Game(app);
         yield game.init();
     });

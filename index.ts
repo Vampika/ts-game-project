@@ -1,6 +1,7 @@
 //@ts-ignore
 import * as PIXI from "./pixi.min.mjs";
 import { Game } from "./Game.js";
+import { CanvasAdapter } from "./CanvasAdapter.js";
 import { gameConfig } from "./config.js";
 
 async function initializeApp() {
@@ -15,6 +16,8 @@ async function initializeApp() {
 
     // Добавляем canvas в DOM
     document.body.appendChild(app.canvas);
+
+    new CanvasAdapter(app);
 
     const game = new Game(app);
     await game.init();

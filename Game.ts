@@ -26,8 +26,8 @@ export class Game {
     private setupScene(): void {
         // Установка фона
         const background = new PIXI.Sprite(PIXI.Texture.from("Background"));
-        background.width = this.app.screen.width;
-        background.height = this.app.screen.height;
+        background.width = this.app.screen.width * 2;
+        background.height = this.app.screen.height * 2;
         background.anchor.set(0.5);
         this.app.stage.addChild(background);
 
@@ -36,14 +36,15 @@ export class Game {
         this.app.stage.addChild(this.tank.view);
 
         // Центрирование сцены
-        this.app.stage.position.set(gameConfig.scene.centerX, gameConfig.scene.centerY);
+        this.app.stage.position.set(this.app.screen.width / 2, this.app.screen.width / 2);
         this.app.stage.interactive = true;
         this.app.stage.interactiveChildren = false;
+        
         this.app.stage.hitArea = new PIXI.Rectangle(
-            gameConfig.scene.hitArea.x,
-            gameConfig.scene.hitArea.y,
-            gameConfig.scene.hitArea.width,
-            gameConfig.scene.hitArea.height
+            -this.app.screen.width,
+            -this.app.screen.height,
+        this.app.screen.width * 2,
+        this.app.screen.height * 2
         );
     }
 
